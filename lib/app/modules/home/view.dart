@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_getx/app/data/models/task.dart';
 import 'package:todo_getx/app/modules/home/controller.dart';
 import 'package:todo_getx/app/core/utils/extensions.dart';
 import 'package:todo_getx/app/modules/home/widgets/add_card.dart';
+import 'package:todo_getx/app/modules/home/widgets/task_card.dart';
 
 class Home extends GetView<HomeController> {
   const Home({super.key});
@@ -21,11 +23,18 @@ class Home extends GetView<HomeController> {
                     TextStyle(fontSize: 24.0.sp, fontWeight: FontWeight.bold),
               ),
             ),
-            GridView.count(
+            Obx(
+              () => GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
-              children: [AddCard()],
+                children: [
+                  ...controller.tasks
+                      .map((element) => TaskCard(task: element))
+                      .toList(),
+                  AddCard()
+                ],
+              ),
             ),
           ],
         ),
