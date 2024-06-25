@@ -6,6 +6,7 @@ import 'package:todo_getx/app/data/models/task.dart';
 import 'package:todo_getx/app/modules/home/controller.dart';
 import 'package:todo_getx/app/core/utils/extensions.dart';
 import 'package:todo_getx/app/modules/home/widgets/add_card.dart';
+import 'package:todo_getx/app/modules/home/widgets/add_dialog.dart';
 import 'package:todo_getx/app/modules/home/widgets/task_card.dart';
 
 class Home extends GetView<HomeController> {
@@ -58,11 +59,19 @@ class Home extends GetView<HomeController> {
         return Obx(
           () => FloatingActionButton(
             backgroundColor: controller.deleting.value ? Colors.red : blue,
-            onPressed: () {},
+              onPressed: () => Get.to(
+                () => AddDialog(),
+                transition: Transition.downToUp,
+              ),
             child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
           ),
         );
-      }),
+        },
+        onAccept: (Task task) {
+          controller.deleteTask(task);
+          EasyLoading.showSuccess('Delete Sucess');
+        },
+      ),
     );
   }
 }
