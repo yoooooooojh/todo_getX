@@ -4,6 +4,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:todo_getx/app/core/utils/extensions.dart';
+import 'package:todo_getx/app/modules/detail/widgets/doing_list.dart';
+import 'package:todo_getx/app/modules/detail/widgets/done_list.dart';
 import 'package:todo_getx/app/modules/home/controller.dart';
 
 class Detail extends StatelessWidget {
@@ -117,7 +119,7 @@ class Detail extends StatelessWidget {
                         homeCtrl.editCtrl.clear();
                       }
                     },
-                    icon: const Icon(Icons.done),
+                    icon: const Icon(Icons.add),
                   ),
                 ),
                 validator: (value) {
@@ -128,6 +130,8 @@ class Detail extends StatelessWidget {
                 },
               ),
             ),
+            DoingList(),
+            DoneList(),
           ],
         ),
       ),
