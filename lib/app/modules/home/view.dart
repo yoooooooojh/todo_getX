@@ -21,7 +21,7 @@ class Home extends GetView<HomeController> {
             Padding(
               padding: EdgeInsets.all(4.0.wp),
               child: Text(
-                'list',
+                'Todo List',
                 style:
                     TextStyle(fontSize: 24.0.sp, fontWeight: FontWeight.bold),
               ),
@@ -59,10 +59,15 @@ class Home extends GetView<HomeController> {
         return Obx(
           () => FloatingActionButton(
             backgroundColor: controller.deleting.value ? Colors.red : blue,
-              onPressed: () => Get.to(
+              onPressed: () {
+                if (controller.tasks.isNotEmpty) {
+                  Get.to(
                 () => AddDialog(),
-                transition: Transition.downToUp,
-              ),
+                transition: Transition.downToUp);
+                } else {
+                  EasyLoading.showInfo('Please create your task type');
+                }
+              },
             child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
           ),
         );
